@@ -6,15 +6,13 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class PacketWrapper
-{
+public class PacketWrapper {
 
 	private Packet packet;
 	private ByteBuf buf;
 
-	public void release()
-	{
-		// buf.release();
+	public void release() {
+		buf.release();
 	}
 
 }

@@ -10,21 +10,25 @@ public abstract class AbstractPacketHandler {
 	/**
 	 * Handshake packet to identify a client with a UUID
 	 */
-	public abstract void handle(Connect connect);
+	public void handle(Connect connect) {
+	}
 
 	/**
 	 * Requests a new order from the server
 	 */
-	public abstract void handle(ImageRequest request);
+	public void handle(ImageRequest request) {
+	}
 
 	/**
 	 * Image the client should render
 	 */
-	public abstract void handle(ImageTask task);
+	public void handle(ImageTask task) {
+	}
 
 	/**
 	 * Should be sent in case the client can´t complete the image
 	 */
-	public abstract void handle(TaskCancel cancel);
+	public void handle(TaskCancel cancel) {
+	}
 
 }

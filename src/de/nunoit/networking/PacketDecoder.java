@@ -9,15 +9,12 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 
-public class PacketDecoder extends ByteToMessageDecoder
-{
+public class PacketDecoder extends ByteToMessageDecoder {
 
 	@Override
-	protected void decode(ChannelHandlerContext ctx, ByteBuf buf, List<Object> out)
-			throws Exception
-	{
-		if (buf.readableBytes() < 8)
-		{
+	protected void decode(ChannelHandlerContext ctx, ByteBuf buf,
+			List<Object> out) throws Exception {
+		if (buf.readableBytes() < 4) {
 			return;
 		}
 		int packetID = buf.readInt();
@@ -26,6 +23,11 @@ public class PacketDecoder extends ByteToMessageDecoder
 
 		packet.read(buf);
 
-		out.add(new PacketWrapper(packet, buf));
+		if (buf.readableBytes() != 0) {
+			System.out.println("Did not read all bytes from packet "
+					+ packet.getClass() + " " + packetID);
+		}
+
+		out.add(new PacketWrapper(packet, buf.copy()));
 	}
 }
